@@ -1,4 +1,4 @@
-﻿function addNewChart(container, labels, type_money, data, type, backgroundColor, pointColor) {
+﻿function addNewChart(container, labels, type_money, data, type, pointColor, backgroundColor) {
 	var options = {
 		type: type,
 		data: {
@@ -7,8 +7,8 @@
 				{
 					label: type_money,
 					data: data,
-					borderWidth: 1,
-					pointRadius: 2,
+					borderWidth: 3,
+					pointRadius: 4,
 					pointBackgroundColor: backgroundColor,
 					backgroundColor: pointColor
 				}

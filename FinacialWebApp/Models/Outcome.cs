@@ -42,33 +42,35 @@ namespace FinacialWebApp.Models.DAO
         }
        static void AddNewOutCome(double money, DateTime time, int type, string note)
         {
-            Outcome outcome = new Outcome(type, time, note, money);
+            Outcome outcome = new Outcome(type, time, note, money*1000);
             File.WriteAllText(NoteOutcomesjsonFile, JsonConvert.SerializeObject(outcome));
             
         }
-        static IList GetOutcomesByYear()
+        public static (Array, Array) GetOutcomesByYear()
         {
             var outcome = GetNoteOutcomes();
             var result = (from o in outcome
+                          orderby o.date
                      group o by o.date.Year into sp
                      select new
                      {
-                         _month = sp.Key.ToString(),
+                         _year = sp.Key.ToString(),
                          _outcome = sp.Sum(n => n.money)
                      }).ToList();
-            return result;
+            return (result.Select(n=>n._year).ToArray(), result.Select(n=>n._outcome).ToArray());
         }
-        static IList GetOutcomesByMonth()
+        public static (Array, Array) GetOutcomesByMonth()
         {
             var outcome = GetNoteOutcomes();
-            IList result = (from o in outcome
+            var result = (from o in outcome
+                          orderby o.date
                          group o by o.date.Month into sp
                          select new
                          {
                              _month = sp.Key.ToString(),
                              _outcome = sp.Sum(n => n.money)
                          }).ToList();
-            return result;
+            return (result.Select(n => n._month).ToArray(), result.Select(n => n._outcome).ToArray());
         }
     }
 }

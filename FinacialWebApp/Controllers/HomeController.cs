@@ -21,6 +21,21 @@ namespace FinacialWebApp.Controllers
             ViewBag.month = month;
             ViewBag.money = money;
             return PartialView();
+        }       
+        public ActionResult OutcomeByMonth()
+        {
+            var (month, money) = Outcome.GetOutcomesByMonth();
+            ViewBag.month = month;
+            ViewBag.money = money;
+            return PartialView();
+        }
+        public ActionResult Outcomes()
+        {
+            return View();
+        }
+        public ActionResult AddNewIncome_Outcome()
+        {
+            return View();
         }
         public ActionResult About()
         {

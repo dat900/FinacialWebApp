@@ -6,13 +6,14 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace FinacialWebApp.Models.DAO
 {
     public class Income
     {
-        public double income;
+        private double money;
         private int month;
         private int year;
         private double living_fee;
@@ -21,21 +22,33 @@ namespace FinacialWebApp.Models.DAO
         private double education;
         private double saving;
         private double play;
+
+        public double Money { get => money; set => money = value; }
+        public int Month { get => month; set => month = value; }
+        public int Year { get => year; set => year = value; }
+        public double Living_fee { get => living_fee; set => living_fee = value; }
+        public double Freedom { get => freedom; set => freedom = value; }
+        public double Donation { get => donation; set => donation = value; }
+        public double Education { get => education; set => education = value; }
+        public double Saving { get => saving; set => saving = value; }
+        public double Play { get => play; set => play = value; }
+        static string BankjsonFile = @"C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\Data\Income.json";
+
+
         public Income(DateTime t, double inc)
         {
-            month = t.Month;
-            year = t.Year;
-            income = inc;
-            living_fee = inc * 0.55;
-            freedom = inc * 0.1;
-            donation = inc * 0.15;
-            education = inc * 0.1;
-            saving = inc * 0.1;
-            play = inc * 0.1;
+            Month = t.Month;
+            Year = t.Year;
+            Money = inc;
+            Living_fee = inc * 0.55;
+            Freedom = inc * 0.1;
+            Donation = inc * 0.15;
+            Education = inc * 0.1;
+            Saving = inc * 0.1;
+            Play = inc * 0.1;
         }
         static List<Income> GetIncome()
         {
-            string BankjsonFile = @"C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\Data\Income.json";
             List<Income> bank = new List<Income>();
             var json = File.ReadAllText(BankjsonFile);
             JArray jArray = JArray.Parse(json);
@@ -51,13 +64,13 @@ namespace FinacialWebApp.Models.DAO
         {
             var income = GetIncome();
             var result = from i in income
-                         orderby i.month
-                         group i by i.month into sp
+                         orderby i.Month
+                         group i by i.Month into sp
                          
                          select new 
                          {
                              month = sp.Key.ToString(),
-                             money = sp.Sum(n => n.income)
+                             money = sp.Sum(n => n.Money)
                          };
             
             return (result.Select(n => n.month).ToArray(), result.Select(n => n.money).ToArray());
@@ -66,13 +79,18 @@ namespace FinacialWebApp.Models.DAO
         {
             var income = GetIncome();
             var result = from i in income
-                         group i by i.year into sp
+                         group i by i.Year into sp
                          select new
                          {
                              _year = sp.Key.ToString(),
-                             _money = sp.Sum(n => n.income)
+                             _money = sp.Sum(n => n.Money)
                          };
             return result;
+        }
+        public void AddNewIncome(DateTime date, double money)
+        {
+            Income income = new Income(date, money*1000);
+            File.WriteAllText(BankjsonFile, JsonConvert.SerializeObject(income));
         }
     }
 }

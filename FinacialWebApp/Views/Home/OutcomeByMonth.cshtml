@@ -1,17 +1,18 @@
-﻿<h2>Monthly Income</h2>
+﻿<h4>Monthly Outcome</h4>
 <button id="btnUpdateChart" class="btn-info" onclick="refresh()">Refresh</button>
 <canvas id="contentContainer" class=""></canvas>
 
 <script type="text/javascript">
 	$('.active').removeClass;
-	$('#dashboard').addClass('active');
+	$('#product').addClass('active');
 	var label_data = @Html.Raw(Json.Encode(ViewBag.month));
 	var data_so_tien = @Html.Raw(Json.Encode(ViewBag.money));
-	
+
 	var chart_container = document.getElementById('contentContainer');
-	addNewChart(chart_container, label_data, 'Income', data_so_tien, 'line', 'rgb(100,91,0)', 'rgb(35, 185, 40)');
+	addNewChart(chart_container, label_data, 'Outcome', data_so_tien, 'line', 'rgb(100,91,0)', 'rgb(216, 86, 60)');
+	chart_container.focus()
 	function refresh() {
 		var chart = document.getElementById('contentContainer');
-		updateChart(chart, '@Url.Action("IncomeByMonth")');
+		updateChart(chart, '@Url.Action("outcomeByMonth")');
 	}
 </script>
