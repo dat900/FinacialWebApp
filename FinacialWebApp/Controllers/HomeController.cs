@@ -33,6 +33,13 @@ namespace FinacialWebApp.Controllers
         {
             return View();
         }
+        public ActionResult OutcomeByType()
+        {
+            var (type, money) = Outcome.GetOutcomeByType();
+            ViewBag.type = type;
+            ViewBag.money = money;
+            return PartialView();
+        }
         public ActionResult AddNewIncome_Outcome()
         {
             return View();

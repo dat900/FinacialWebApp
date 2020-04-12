@@ -152,10 +152,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Income.cs" />
+    <Compile Include="Models\MapTypeName.cs" />
     <Compile Include="Models\Outcome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -174,7 +176,9 @@
     </Content>
     <Content Include="Data\Income.json" />
     <Content Include="Data\NoteOutcomes.json" />
+    <Content Include="Data\label_name.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -205,6 +209,8 @@
     <Content Include="Views\Home\OutcomeByMonth.cshtml" />
     <Content Include="Views\Home\Outcomes.cshtml" />
     <Content Include="Views\Home\AddNewIncome_Outcome.cshtml" />
+    <Content Include="Views\Home\OutcomeByType.cshtml" />
+    <Content Include="Views\Income\IncomeByYear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

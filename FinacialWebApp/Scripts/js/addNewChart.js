@@ -15,5 +15,5 @@
 			]
 		}
 	};
-	new Chart(container, options);
+	container =  new Chart(container, options);
 }

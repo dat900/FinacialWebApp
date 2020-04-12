@@ -75,7 +75,7 @@ namespace FinacialWebApp.Models.DAO
             
             return (result.Select(n => n.month).ToArray(), result.Select(n => n.money).ToArray());
         }
-        static Object GetIncomeByYear()
+        public static object GetIncomeByYear()
         {
             var income = GetIncome();
             var result = from i in income

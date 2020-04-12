@@ -72,5 +72,18 @@ namespace FinacialWebApp.Models.DAO
                          }).ToList();
             return (result.Select(n => n._month).ToArray(), result.Select(n => n._outcome).ToArray());
         }
+        public static (Array, Array) GetOutcomeByType()
+        {
+            var outcome = GetNoteOutcomes();
+            var result = (from o in outcome
+                          orderby o.type
+                          group o by o.type into p
+                          select new
+                          {
+                              _type = p.Key.ToString(),
+                              _outcome = p.Sum(n => n.money)
+                          }).ToList();
+            return (result.Select(n => n._type).ToArray(), result.Select(n => n._outcome).ToArray());
+        }
     }
 }

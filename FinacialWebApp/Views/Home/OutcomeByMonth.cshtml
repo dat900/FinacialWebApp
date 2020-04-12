@@ -1,18 +1,17 @@
-﻿<h4>Monthly Outcome</h4>
-<button id="btnUpdateChart" class="btn-info" onclick="refresh()">Refresh</button>
-<canvas id="contentContainer" class=""></canvas>
-
+﻿<button id="btnUpdateChart" class="btn-info" onclick="refresh()">Refresh</button>
 <script type="text/javascript">
 	$('.active').removeClass;
 	$('#product').addClass('active');
 	var label_data = @Html.Raw(Json.Encode(ViewBag.month));
 	var data_so_tien = @Html.Raw(Json.Encode(ViewBag.money));
 
-	var chart_container = document.getElementById('contentContainer');
-	addNewChart(chart_container, label_data, 'Outcome', data_so_tien, 'line', 'rgb(100,91,0)', 'rgb(216, 86, 60)');
-	chart_container.focus()
+	var chart_container = document.getElementById('chartContainer');
+	addNewChart(chart_container, label_data, 'Outcome', data_so_tien, 'line', '', 'rgb(216, 86, 60)');
+	chart_container.options = {
+		borderColor: 'rgb(100,91,0)'
+	}
 	function refresh() {
-		var chart = document.getElementById('contentContainer');
+		var chart = document.getElementById('chartContainer');
 		updateChart(chart, '@Url.Action("outcomeByMonth")');
 	}
 </script>
