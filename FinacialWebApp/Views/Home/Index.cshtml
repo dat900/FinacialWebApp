@@ -20,7 +20,7 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<form class="form-control" action=@Url.Action("AddIncome", "Income")>
+				<form class="form-control" action=@Url.Action("AddIncome", "Income") method="post">
 					<label class="form-control">Date: </label>
 					<input class="form-control" type="datetime"/>
 					<label>Money(1.000đ): </label>
@@ -38,6 +38,6 @@
 	</div>
 </div>
 <canvas id="chartContainer"></canvas>
-@Html.Action("IncomeByMonth", "Home")
+@Html.Action("IncomeByMonth", "Incomes")
 
 

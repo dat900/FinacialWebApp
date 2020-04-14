@@ -22,6 +22,7 @@ namespace FinacialWebApp.Models.DAO
         private double education;
         private double saving;
         private double play;
+        private string note;
 
         public double Money { get => money; set => money = value; }
         public int Month { get => month; set => month = value; }
@@ -32,10 +33,12 @@ namespace FinacialWebApp.Models.DAO
         public double Education { get => education; set => education = value; }
         public double Saving { get => saving; set => saving = value; }
         public double Play { get => play; set => play = value; }
+        public string Note { get => note; set => note = value; }
+
         static string BankjsonFile = @"C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\Data\Income.json";
 
 
-        public Income(DateTime t, double inc)
+        public Income(DateTime t, double inc, string note)
         {
             Month = t.Month;
             Year = t.Year;
@@ -46,8 +49,9 @@ namespace FinacialWebApp.Models.DAO
             Education = inc * 0.1;
             Saving = inc * 0.1;
             Play = inc * 0.1;
+            Note = note;
         }
-        static List<Income> GetIncome()
+        public static List<Income> GetIncome()
         {
             List<Income> bank = new List<Income>();
             var json = File.ReadAllText(BankjsonFile);
@@ -56,40 +60,14 @@ namespace FinacialWebApp.Models.DAO
             {
                 var dateTime = DateTime.Parse(item["time"].ToString());
                 var money = Double.Parse(item["income"].ToString());
-                bank.Add(new Income(dateTime, money));
+                var note = item["note"].ToString();
+                bank.Add(new Income(dateTime, money, note));
             }
             return bank;
         }
-        public static (Array, Array) GetIncomeByMonth()
+        public static void AddNewIncome(DateTime date, double money, string note)
         {
-            var income = GetIncome();
-            var result = from i in income
-                         orderby i.Month
-                         group i by i.Month into sp
-                         
-                         select new 
-                         {
-                             month = sp.Key.ToString(),
-                             money = sp.Sum(n => n.Money)
-                         };
-            
-            return (result.Select(n => n.month).ToArray(), result.Select(n => n.money).ToArray());
-        }
-        public static object GetIncomeByYear()
-        {
-            var income = GetIncome();
-            var result = from i in income
-                         group i by i.Year into sp
-                         select new
-                         {
-                             _year = sp.Key.ToString(),
-                             _money = sp.Sum(n => n.Money)
-                         };
-            return result;
-        }
-        public void AddNewIncome(DateTime date, double money)
-        {
-            Income income = new Income(date, money*1000);
+            Income income = new Income(date, money*1000, note);
             File.WriteAllText(BankjsonFile, JsonConvert.SerializeObject(income));
         }
     }

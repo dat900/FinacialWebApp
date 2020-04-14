@@ -1,8 +1,30 @@
-{
-	1: "Living",
-	2: "Free",
-	3: "Donate",
-	4: "Education",
-	5: "Save",
-	6: "Play"
-}
+[
+	{
+		"code": 0,
+		"name": "Living"
+	},
+	{
+		"code": 1,
+		"name": "Free"
+	},
+	{
+		"code": 2,
+		"name": "Donate"
+	},
+	{
+		"code": 3,
+		"name": "Education"
+	},
+	{
+		"code": 4,
+		"name": "Save"
+	},
+	{
+		"code": 5,
+		"name": "Play"
+	},
+	{
+		"code": 6,
+		"name":  "Unknown"
+	}
+		]

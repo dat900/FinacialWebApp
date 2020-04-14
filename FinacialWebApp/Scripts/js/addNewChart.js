@@ -1,6 +1,6 @@
-﻿function addNewChart(container, labels, type_money, data, type, pointColor, backgroundColor) {
+﻿function addNewChart(container, labels, type_money, data, type_chart, pointColor, backgroundColor) {
 	var options = {
-		type: type,
+		type: type_chart,
 		data: {
 			labels: labels,
 			datasets: [

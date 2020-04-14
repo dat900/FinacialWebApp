@@ -153,6 +153,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncomeController.cs" />
+    <Compile Include="Controllers\OutcomesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,12 +206,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\IncomeByMonth.cshtml" />
-    <Content Include="Views\Home\OutcomeByMonth.cshtml" />
-    <Content Include="Views\Home\Outcomes.cshtml" />
-    <Content Include="Views\Home\AddNewIncome_Outcome.cshtml" />
-    <Content Include="Views\Home\OutcomeByType.cshtml" />
-    <Content Include="Views\Income\IncomeByYear.cshtml" />
+    <Content Include="Views\Incomes\IncomeByMonth.cshtml" />
+    <Content Include="Views\Outcomes\OutcomeByMonth.cshtml" />
+    <Content Include="Views\Outcomes\Outcomes.cshtml" />
+    <Content Include="Views\Outcomes\OutcomeByType.cshtml" />
+    <Content Include="Views\Incomes\IncomeByYear.cshtml" />
+    <Content Include="Views\Outcomes\OutcomeByYear.cshtml" />
+    <Content Include="Views\Incomes\AddIncome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

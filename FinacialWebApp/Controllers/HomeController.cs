@@ -15,35 +15,6 @@ namespace FinacialWebApp.Controllers
         {
             return View();
         }
-        public ActionResult IncomeByMonth()
-        {
-            var (month, money) = Income.GetIncomeByMonth();
-            ViewBag.month = month;
-            ViewBag.money = money;
-            return PartialView();
-        }       
-        public ActionResult OutcomeByMonth()
-        {
-            var (month, money) = Outcome.GetOutcomesByMonth();
-            ViewBag.month = month;
-            ViewBag.money = money;
-            return PartialView();
-        }
-        public ActionResult Outcomes()
-        {
-            return View();
-        }
-        public ActionResult OutcomeByType()
-        {
-            var (type, money) = Outcome.GetOutcomeByType();
-            ViewBag.type = type;
-            ViewBag.money = money;
-            return PartialView();
-        }
-        public ActionResult AddNewIncome_Outcome()
-        {
-            return View();
-        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -11,9 +11,9 @@ namespace FinacialWebApp.Models.DAO
 {
     public class Outcome
     {
-        DateTime date;
+        public DateTime date;
         public int type;
-        string note;
+        public string note;
         public double money;
         static string NoteOutcomesjsonFile = @"C:\Users\LAPTOP\source\repos\SavingMoney\SavingMoney\Data\NoteOutcomes.json";
 
@@ -24,7 +24,7 @@ namespace FinacialWebApp.Models.DAO
             note = n;
             money = m;
         }
-         private static List<Outcome> GetNoteOutcomes()
+         public static List<Outcome> GetNoteOutcomes()
         {
             List<Outcome> noteOutcomes = new List<Outcome>();
             var json = File.ReadAllText(NoteOutcomesjsonFile);
@@ -46,44 +46,7 @@ namespace FinacialWebApp.Models.DAO
             File.WriteAllText(NoteOutcomesjsonFile, JsonConvert.SerializeObject(outcome));
             
         }
-        public static (Array, Array) GetOutcomesByYear()
-        {
-            var outcome = GetNoteOutcomes();
-            var result = (from o in outcome
-                          orderby o.date
-                     group o by o.date.Year into sp
-                     select new
-                     {
-                         _year = sp.Key.ToString(),
-                         _outcome = sp.Sum(n => n.money)
-                     }).ToList();
-            return (result.Select(n=>n._year).ToArray(), result.Select(n=>n._outcome).ToArray());
-        }
-        public static (Array, Array) GetOutcomesByMonth()
-        {
-            var outcome = GetNoteOutcomes();
-            var result = (from o in outcome
-                          orderby o.date
-                         group o by o.date.Month into sp
-                         select new
-                         {
-                             _month = sp.Key.ToString(),
-                             _outcome = sp.Sum(n => n.money)
-                         }).ToList();
-            return (result.Select(n => n._month).ToArray(), result.Select(n => n._outcome).ToArray());
-        }
-        public static (Array, Array) GetOutcomeByType()
-        {
-            var outcome = GetNoteOutcomes();
-            var result = (from o in outcome
-                          orderby o.type
-                          group o by o.type into p
-                          select new
-                          {
-                              _type = p.Key.ToString(),
-                              _outcome = p.Sum(n => n.money)
-                          }).ToList();
-            return (result.Select(n => n._type).ToArray(), result.Select(n => n._outcome).ToArray());
-        }
+        
+        
     }
 }
