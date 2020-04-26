@@ -12,36 +12,26 @@
 	}
 </style>
 <h2>Outcomes</h2>
-<button id="outcomebymonth" onclick="monthChart()" class="btn-primary">By Month</button>
-<button id="outcomebyyear" onclick="annualChart()" class="btn-primary">By Year</button>
+<button id="outcomebymonth" onclick="createChart('@Url.Action("OutcomeByMonth", "Outcomes")', 'Monthly Outcome');" class="btn-primary">By Month</button>
+<button id="outcomebyyear" onclick="createChart('@Url.Action("OutcomeByYear", "Outcomes")', 'Annual Outcome');" class="btn-primary">By Year</button>
 <div class="row">
 	<canvas id="outcomechartContainer"></canvas>
 	<canvas id="typeoutcomechartContainer"></canvas>
 </div>
 <script type="text/javascript">
-	var chart = document.getElementById('outcomechartContainer');	
-	monthChart();
-	function monthChart() {
+	var chart = document.getElementById('outcomechartContainer');
+	createChart("@Url.Action("OutcomeByMonth", "Outcomes")", "Monthly Income");
+	function createChart(url, label_money) {
 		$.ajax({
-		url: '@Url.Action("OutcomeByMonth", "Outcomes")',
+		url: url,
 		data: {},
 		method: 'post',
 		async: true,
-		success: function (data) {
-			addNewChart(chart, data.labels, 'Monthly Outcome', data.money, 'line', '', 'rgb(216, 86, 60)');
+			success: function (data) {
+				addNewChart(chart, data.labels, label_money, data.money, 'line', '', 'rgb(216, 86, 60)');
+			presentChart = url
 		}
-	});		
-	}
-	function annualChart() {
-		$.ajax({
-		url: '@Url.Action("OutcomeByYear", "Outcomes")',
-		data: {},
-		method: 'post',
-		async: true,
-		success: function (data) {
-			addNewChart(chart, data.labels, 'Annual Outcome', data.money, 'line', '', 'rgb(216, 86, 50)');
-		}
-	});		
+	});
 	}
 	var typeChart = document.getElementById("typeoutcomechartContainer");
 	$.ajax({
@@ -52,5 +42,5 @@
 		success: function (data) {
 			addNewChart(typeChart, data.labels, 'Type Outcome', data.money, 'line', 'rgb(216,86,40)', 'rgb(216, 86, 60)');
 		}
-	});	
+	});
 </script>
