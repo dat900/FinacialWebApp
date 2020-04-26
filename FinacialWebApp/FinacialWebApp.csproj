@@ -152,12 +152,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IncomeController.cs" />
+    <Compile Include="Controllers\IncomesController.cs" />
     <Compile Include="Controllers\OutcomesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Income.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Models\MapTypeName.cs" />
     <Compile Include="Models\Outcome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +179,7 @@
     <Content Include="Data\Income.json" />
     <Content Include="Data\NoteOutcomes.json" />
     <Content Include="Data\label_name.json" />
+    <Content Include="Data\logindata.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -206,16 +208,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Incomes\IncomeByMonth.cshtml" />
-    <Content Include="Views\Outcomes\OutcomeByMonth.cshtml" />
     <Content Include="Views\Outcomes\Outcomes.cshtml" />
-    <Content Include="Views\Outcomes\OutcomeByType.cshtml" />
-    <Content Include="Views\Incomes\IncomeByYear.cshtml" />
-    <Content Include="Views\Outcomes\OutcomeByYear.cshtml" />
     <Content Include="Views\Incomes\AddIncome.cshtml" />
+    <Content Include="Views\Incomes\Incomes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -5,16 +5,8 @@
 		data: {},
 		async: true,
 		success: function (data) {
-			chart.options = {
-				data: {
-					labels: data.labels,
-					datasets: [
-						{
-							data: data.money,
-						}
-					]
-				}
-			};
+			chart.data.labels = data.labels;
+			chart.data.datasets[0].data = data.money;
 			chart.update();
 		}
 	});

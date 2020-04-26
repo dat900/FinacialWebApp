@@ -10,10 +10,11 @@ namespace FinacialWebApp.Controllers
     public class IncomesController : Controller
     {
         // GET: Income
-        public ActionResult Index()
+        public ActionResult Incomes()
         {
             return View();
         }
+        [HttpPost]
         public ActionResult IncomeByYear()
         {
             var income = Income.GetIncome();
@@ -25,10 +26,11 @@ namespace FinacialWebApp.Controllers
                              _year = gb.Key.ToString(),
                              _income = gb.Sum(n=>n.Money)
                          };
-            ViewBag.year = result.Select(n => n._year);
-            ViewBag.income = result.Sum(n => n._income);
-            return PartialView();
+            var labels = result.Select(n => n._year);
+            var money = result.Select(n => n._income);
+            return Json(new { labels, money }, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
         public ActionResult IncomeByMonth()
         {
             var income = Income.GetIncome();
@@ -41,9 +43,9 @@ namespace FinacialWebApp.Controllers
                              month = sp.Key.ToString(),
                              money = sp.Sum(n => n.Money)
                          };
-            ViewBag.month = result.Select(n => n.month);
-            ViewBag.income = result.Select(n => n.money);
-            return PartialView();
+            var labels = result.Select(n => n.month);
+            var money = result.Select(n => n.money);
+            return Json(new { labels, money }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult AddIncome(FormCollection formCollection)

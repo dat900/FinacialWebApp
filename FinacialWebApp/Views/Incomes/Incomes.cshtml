@@ -1,0 +1,55 @@
+﻿
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<style>
+	h2 {
+		margin-top: 10px;
+		margin-bottom: 15px;
+	}
+
+	h4 {
+		margin-top: 10px;
+	}
+</style>
+<button id="refresh" onclick="refresh()" class="btn-primary">Refresh</button>
+<button id="outcomebymonth" onclick="monthChart()" class="btn-primary">By Month</button>
+<button id="outcomebyyear" onclick="annualChart()" class="btn-primary">By Year</button>
+<div class="row">
+	<canvas id="incomechartContainer"></canvas>
+</div>
+<script type="text/javascript">
+	var chart = document.getElementById('incomechartContainer');
+	var presentChart;
+	monthChart();
+	function monthChart() {
+		$.ajax({
+		url: '@Url.Action("IncomeByMonth", "Incomes")',
+		data: {},
+		method: 'post',
+		async: true,
+		success: function (data) {
+			addNewChart(chart, data.labels, 'Monthly Income', data.money, 'line', '', 'rgb(216, 86, 60)');
+			presentChart = '@Url.Action("IncomeByMonth", "Incomes")';
+		}
+	});
+	}
+	function annualChart() {
+		$.ajax({
+		url: '@Url.Action("IncomeByYear", "Incomes")',
+		data: {},
+		method: 'post',
+		async: true,
+		success: function (data) {
+			addNewChart(chart, data.labels, 'Annual Income', data.money, 'line', '', 'rgb(216, 86, 50)');
+			presentChart = '@Url.Action("IncomeByYear", "Incomes")';
+		}
+	});
+	}
+	function refresh() {
+		updateChart(chart, presentChart);
+	}
+</script>

@@ -2,42 +2,18 @@
 @{
 	ViewBag.Title = "Dash Board";
 }
-<h1>Incomes</h1>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">
-	Add Income
-</button>
-
-<!-- The Modal -->
-<div class="modal" id="AddModal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">Modal Heading</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-
-			<!-- Modal body -->
-			<div class="modal-body">
-				<form class="form-control" action=@Url.Action("AddIncome", "Income") method="post">
-					<label class="form-control">Date: </label>
-					<input class="form-control" type="datetime"/>
-					<label>Money(1.000đ): </label>
-					<input type="number" class="form-control"/>
-					<button type="submit" class="bg-success form-control">Add New</button>
-					</form>
-			</div>
-
-			<!-- Modal footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-			</div>
-
-		</div>
-	</div>
+<div class="container glyphicon-align-center">
+	<h1>Login</h1>
+	@using (Html.BeginForm("Login", "Home", new { Url = Request.Url }))
+	{
+		<label class="form-control">User Name: </label>
+		<input name="username" class="form-control" type="text" />
+		<label class="form-control">Password: </label>
+		<input name="password" class="form-control" type="password" />
+		<input type="submit" class="btn-success" value="Login"/>
+	}
 </div>
-<canvas id="chartContainer"></canvas>
-@Html.Action("IncomeByMonth", "Incomes")
+
+
 
 

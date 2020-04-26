@@ -1,10 +1,46 @@
-[{"time":"03/06/2020","income":"422.31"},
-{"time":"12/05/2019","income":"216.63"},
-{"time":"01/07/2020","income":"436.50"},
-{"time":"01/03/2020","income":"152.68"},
-{"time":"01/08/2020","income":"365.07"},
-{"time":"02/01/2020","income":"204.74"},
-{"time":"12/09/2019","income":"458.47"},
-{"time":"01/12/2020","income":"499.11"},
-{"time":"12/10/2019","income":"357.91"},
-{"time":"03/03/2020","income":"292.60"}]
+[{"time":"03/06/2020","income":"422.31","note": "Note for test"},
+	{
+		"time": "12/05/2019",
+		"income": "216.63",
+		"note": "Note for test"
+	},
+	{
+		"time": "01/07/2020",
+		"income": "436.50",
+		"note": "Note for test"
+	},
+	{
+		"time": "01/03/2020",
+		"income": "152.68",
+		"note": "Note for test"
+	},
+	{
+		"time": "01/08/2020",
+		"income": "365.07",
+		"note": "Note for test"
+	},
+	{
+		"time": "02/01/2020",
+		"income": "204.74",
+		"note": "Note for test"
+	},
+	{
+		"time": "12/09/2019",
+		"income": "458.47",
+		"note": "Note for test"
+	},
+	{
+		"time": "01/12/2020",
+		"income": "499.11",
+		"note": "Note for test"
+	},
+	{
+		"time": "12/10/2019",
+		"income": "357.91",
+		"note": "Note for test"
+	},
+	{
+		"time": "03/03/2020",
+		"income": "292.60",
+		"note": "Note for test"
+	}]
