@@ -1,12 +1,13 @@
-﻿
-@{
+﻿@{
 	ViewBag.Title = "Outcomes";
 }
+@model Dictionary<int, String>
 <style>
 	h2 {
 		margin-top: 10px;
 		margin-bottom: 15px;
 	}
+
 	h4 {
 		margin-top: 10px;
 	}
@@ -14,10 +15,55 @@
 <h2>Outcomes</h2>
 <button id="outcomebymonth" onclick="createChart('@Url.Action("OutcomeByMonth", "Outcomes")', 'Monthly Outcome');" class="btn-primary">By Month</button>
 <button id="outcomebyyear" onclick="createChart('@Url.Action("OutcomeByYear", "Outcomes")', 'Annual Outcome');" class="btn-primary">By Year</button>
+<button type="button" class="btn-primary" data-toggle="modal" data-target="#addModal">
+	Add Income
+</button>
+
+<!-- The Modal -->
+<div class="modal" role="dialog" id="addModal" tabindex="-1" aria-labelledby="addModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title" id="addModal">Income</h4>
+				@*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<form class="form-group" action=@Url.Action("AddOutcome", "Outcomes", new { @url = Request.Url.ToString() }) method="post">
+					<label class="">Date: </label>
+					<input class="" type="datetime" name="date" /><br />
+					<label>Type:</label>
+					<select name="type">
+						<!--render from json-->
+						@foreach (var item in Model)
+						{
+							<option value=@item.Key>@item.Value</option>
+						}
+					</select><br />
+					<label>Money(1.000đ): </label>
+					<input type="number" name="money" /><br />
+					<label id="note">Note</label>
+					<input type="text" name="note" /><br/>
+					<input type="submit" class="bg-success" value="Add New"></>
+				</form>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 <div class="row">
 	<canvas id="outcomechartContainer"></canvas>
 	<canvas id="typeoutcomechartContainer"></canvas>
 </div>
+
 <script type="text/javascript">
 	var chart = document.getElementById('outcomechartContainer');
 	createChart("@Url.Action("OutcomeByMonth", "Outcomes")", "Monthly Income");

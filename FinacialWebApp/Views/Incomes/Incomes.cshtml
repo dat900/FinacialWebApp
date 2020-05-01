@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
 	ViewBag.Title = "Incomes";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -18,10 +17,53 @@
 <button id="refresh" onclick="refresh()" class="btn-primary">Refresh</button>
 <button id="outcomebymonth" onclick="createChart('@Url.Action("IncomeByMonth", "Incomes")', 'Monthly Income')" class="btn-primary">By Month</button>
 <button id="outcomebyyear" onclick="createChart('@Url.Action("IncomeByYear", "Incomes")', 'Annual Income')" class="btn-primary">By Year</button>
+<button type="button" class="btn-primary" data-toggle="modal" data-target="#AddModal">
+	Add Income
+</button>
+
+<!-- The Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="AddModal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Income</h4>
+				@*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<form class="form-group" action=@Url.Action("AddIncome", "Incomes", new { @urlString = Request.Url.ToString() }) method="post">
+					<label class="">Date: </label>
+					<input class="" type="datetime" name="date"/><br />
+					<label>Money(1.000đ): </label>
+					<input type="number" name="money"/><br />
+					<label id="note">Note</label>
+					<input type="text" name="note" />
+					<input type="submit" class="bg-success ">Add New</>
+				</form>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 <div class="row">
 	<canvas id="incomechartContainer"></canvas>
 </div>
 <script type="text/javascript">
+	//init modal
+	var options = {
+		'kayboard': false
+	}
+	$('#AddModal').modal(options);
+
+	//init chart
 	var chart = document.getElementById('incomechartContainer');
 	var presentChart;
 	createChart("@Url.Action("IncomeByMonth", "Incomes")", "Monthly Income");

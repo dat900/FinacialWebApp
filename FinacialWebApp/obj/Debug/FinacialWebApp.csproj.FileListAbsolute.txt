@@ -94,4 +94,3 @@ C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\bin\Microsoft.VisualS
 C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\bin\Microsoft.VisualStudio.OLE.Interop.dll
 C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\bin\stdole.dll
 C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\bin\System.ValueTuple.xml
-C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\obj\Debug\FinacialWebApp.csprojAssemblyReference.cache

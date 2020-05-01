@@ -9,6 +9,8 @@ namespace FinacialWebApp.Models
 {
     public class MapTypeName
     {
+        public int typecode;
+        public string typename;
         public static Dictionary<int, string> ReadLabelName()
         {
             Dictionary<int, string> label = new Dictionary<int, string>();

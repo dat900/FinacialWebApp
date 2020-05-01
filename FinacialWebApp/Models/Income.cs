@@ -16,39 +16,21 @@ namespace FinacialWebApp.Models.DAO
         private double money;
         private int month;
         private int year;
-        private double living_fee;
-        private  double freedom;
-        private double donation;
-        private double education;
-        private double saving;
-        private double play;
         private string note;
 
         public double Money { get => money; set => money = value; }
         public int Month { get => month; set => month = value; }
         public int Year { get => year; set => year = value; }
-        public double Living_fee { get => living_fee; set => living_fee = value; }
-        public double Freedom { get => freedom; set => freedom = value; }
-        public double Donation { get => donation; set => donation = value; }
-        public double Education { get => education; set => education = value; }
-        public double Saving { get => saving; set => saving = value; }
-        public double Play { get => play; set => play = value; }
         public string Note { get => note; set => note = value; }
 
         static string BankjsonFile = @"C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\Data\Income.json";
 
 
-        public Income(DateTime t, double inc, string note)
+        public Income(int month, int year, double inc, string note)
         {
-            Month = t.Month;
-            Year = t.Year;
+            Month = month;
+            Year = year;
             Money = inc;
-            Living_fee = inc * 0.55;
-            Freedom = inc * 0.1;
-            Donation = inc * 0.15;
-            Education = inc * 0.1;
-            Saving = inc * 0.1;
-            Play = inc * 0.1;
             Note = note;
         }
         public static List<Income> GetIncome()
@@ -58,17 +40,20 @@ namespace FinacialWebApp.Models.DAO
             JArray jArray = JArray.Parse(json);
             foreach (var item in jArray)
             {
-                var dateTime = DateTime.Parse(item["time"].ToString());
-                var money = Double.Parse(item["income"].ToString());
-                var note = item["note"].ToString();
-                bank.Add(new Income(dateTime, money, note));
+                var year = int.Parse(item["Year"].ToString());
+                var month = int.Parse(item["Month"].ToString());
+                var money = double.Parse(item["Money"].ToString());
+                var note = item["Note"].ToString();
+                bank.Add(new Income(month, year, money, note));
             }
             return bank;
         }
         public static void AddNewIncome(DateTime date, double money, string note)
         {
-            Income income = new Income(date, money*1000, note);
-            File.WriteAllText(BankjsonFile, JsonConvert.SerializeObject(income));
+            Income income = new Income(date.Month, date.Year, money*1000, note);
+            List<Income> incomes = GetIncome();
+            incomes.Add(income);
+            File.WriteAllText(BankjsonFile, JsonConvert.SerializeObject(incomes));
         }
     }
 }

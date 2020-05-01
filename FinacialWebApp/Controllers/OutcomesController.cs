@@ -16,7 +16,8 @@ namespace FinacialWebApp.Controllers
         // GET: Outcomes
         public ActionResult Outcomes()
         {
-            return View();
+            
+            return View(MapTypeName.ReadLabelName());
         }
         [HttpPost]
         public ActionResult OutcomeByMonth()
@@ -76,6 +77,16 @@ namespace FinacialWebApp.Controllers
             var labels = Mapdata(result.Select(n => n.label));
             var money = result.Select(n => n.money);
             return Json(new { labels, money }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult AddOutcome(FormCollection form, String url)
+        {
+            var date = DateTime.Parse(form["date"].ToString());
+            var money = double.Parse(form["money"].ToString());
+            var type = int.Parse(form["type"].ToString());
+            var note = form["note"].ToString();
+            Outcome.AddNewOutCome(money, date, type, note);
+            return Redirect(url);
         }
     }
 }

@@ -47,14 +47,13 @@ namespace FinacialWebApp.Controllers
             var money = result.Select(n => n.money);
             return Json(new { labels, money }, JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        public ActionResult AddIncome(FormCollection formCollection)
+        public ActionResult AddIncome(FormCollection formCollection, String urlString)
         {
             var date = DateTime.Parse(formCollection["date"].ToString());
             var income = int.Parse(formCollection["money"].ToString());
             var note = formCollection["note"].ToString();
             Income.AddNewIncome(date, income, note);
-            return View();
+            return Redirect(urlString);
         }
     }
 }

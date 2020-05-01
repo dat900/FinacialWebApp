@@ -15,7 +15,7 @@ namespace FinacialWebApp.Models.DAO
         public int type;
         public string note;
         public double money;
-        static string NoteOutcomesjsonFile = @"C:\Users\LAPTOP\source\repos\SavingMoney\SavingMoney\Data\NoteOutcomes.json";
+        static string NoteOutcomesjsonFile = @"C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\Data\NoteOutcomes.json";
 
         public Outcome(int t, DateTime d, string n, double m)
         {
@@ -32,18 +32,20 @@ namespace FinacialWebApp.Models.DAO
             foreach (var item in jArray)
             {
                 string note = item["note"].ToString();
-                var type = Int32.Parse(item["type"].ToString());
-                var time = DateTime.Parse(item["time"].ToString());
-                var money = Double.Parse(item["money"].ToString());
+                var type = int.Parse(item["type"].ToString());
+                var time = DateTime.Parse(item["date"].ToString());
+                var money = double.Parse(item["money"].ToString());
                 noteOutcomes.Add(new Outcome(type, time, note, money));
 
             }
             return noteOutcomes;
         }
-       static void AddNewOutCome(double money, DateTime time, int type, string note)
+          public static void AddNewOutCome(double money, DateTime time, int type, string note)
         {
             Outcome outcome = new Outcome(type, time, note, money*1000);
-            File.WriteAllText(NoteOutcomesjsonFile, JsonConvert.SerializeObject(outcome));
+            List<Outcome> outcomes = GetNoteOutcomes();
+            outcomes.Add(outcome);
+            File.WriteAllText(NoteOutcomesjsonFile, JsonConvert.SerializeObject(outcomes));
             
         }
         
