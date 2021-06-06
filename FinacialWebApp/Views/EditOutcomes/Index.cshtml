@@ -1,0 +1,92 @@
+﻿@model FinacialWebApp.Models.OutcomeViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Outcomes</h2>
+<style>
+	.content {
+		max-height: 450px;
+		overflow-y: auto;
+	}
+	.outcome-date {
+		width: 180px;
+		padding-right: 0px;
+	}
+</style>
+<div class="container-fluid">
+	@using (Html.BeginForm("EditOutcomes", "EditOutcomes", FormMethod.Post, new { @form = "form", @id = "listOutcomes" }))
+	{
+		<table class="table">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Date)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Type)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Note)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Money)
+				</th>
+
+			</tr>
+		</table>
+		<div class="content">
+			<table class="table table-content">
+				@Html.AntiForgeryToken()
+				@for (int i = 0; i < Model.outcomes.Count; i++)
+				{
+					<tr>
+						<td>
+							<input type="text" class="outcome-date" name="outcomes[@i].Date" autocomplete="off" value="@Model.outcomes.ElementAt(i).Date.ToShortDateString()" />
+						</td>
+						<td>
+							<select name="outcomes[@i].Type" class="type-select">
+								@foreach (var type in Model.Types)
+								{
+									if (type.Type_num == Model.outcomes[i].Type)
+									{
+										<option value="@type.Type_num" selected>@type.Type_name</option>
+									}
+									else
+									{
+										<option value="@type.Type_num">@type.Type_name</option>
+									}
+
+								}
+							</select>
+							@*<input type="text" name="outcomes[@i].Type" value="@Model.outcomes.ElementAt(i).Type" />*@
+						</td>
+						<td>
+							<input type="text" name="outcomes[@i].Note" value="@Model.outcomes.ElementAt(i).Note" />
+						</td>
+						<td>
+							<input type="text" name="outcomes[@i].Money" value="@Model.outcomes.ElementAt(i).Money" />
+						</td>
+						<td>
+							<a href="#">Delete</a>
+						</td>
+					</tr>
+				}
+
+			</table>
+		</div>
+		<input type="submit" value="Save" />
+		<button id="addNew">Add New</button>
+	}
+
+</div>
+<script type="text/javascript">
+	$(".outcome-date").datepicker({
+		dateFormat: "yy/mm/dd"
+	})
+	$('#addNew').click(function () {
+		$('#listOutcomes').attr('action','@Url.Action("AddNew","EditOutcomes")')
+		$('#listOutcomes').submit();
+	})
+</script>

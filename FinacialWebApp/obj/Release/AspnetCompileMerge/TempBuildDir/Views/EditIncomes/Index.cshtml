@@ -1,0 +1,84 @@
+﻿@model FinacialWebApp.Models.IncomesViewModel
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+	.content {
+		max-height: 450px;
+		overflow-y: auto;
+	}
+	
+</style>
+<div class="container-fluid">
+	<h2>Index</h2>
+	@using (Html.BeginForm("EditIncomes", "EditIncomes", FormMethod.Post, new { @form = "form" }))
+	{
+
+		<table class="table">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Money)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Month)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Year)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Note)
+				</th>
+				<th></th>
+			</tr>
+		</table>
+		<div class="content">
+			<table class="table">
+				@Html.AntiForgeryToken()
+				@for (int i = 0; i < Model.incomes.Count; i++)
+				{
+					<tr>
+						<td>
+							<input type="text" name="incomes[@i].Money" inputmode="numeric" value="@Model.incomes.ElementAt(i).Money" />
+						</td>
+						<td>
+							<input class="month" type="text" name="incomes[@i].Month" inputmode="numeric" value="@Model.incomes.ElementAt(i).Month" />
+						</td>
+						<td>
+							<input class="year" type="text" name="incomes[@i].Year" inputmode="numeric" value="@Model.incomes.ElementAt(i).Year" />
+						</td>
+						<td>
+							<input type="text" name="incomes[@i].Note" value="@Model.incomes.ElementAt(i).Note" />
+						</td>
+						<td>
+							<a href="#">Delete</a>
+						</td>
+					</tr>
+				}
+			</table>
+		</div>
+		<input type="submit" value="Save" />
+		<button id="addNew">Add New</button>
+	}
+</div>
+<script>
+	$(document).ready(function () {
+		$('a').click(function () {
+			$(this).closest('tr').find(":input").attr('disabled', !this.checked);
+		});
+		$(".month").datepicker({
+			dateFormat: "m",
+			changeMonth: true,
+			shwowButtonPanel: true
+		})
+		$(".year").datepicker({
+			dateFormat: "yy",
+			changeYear: true
+		})
+		$('#addNew').click(function () {
+			$('form').attr('action', '@Url.Action("AddNew", "EditIncomes")')
+			$('form').submit();
+		})
+	});
+</script>

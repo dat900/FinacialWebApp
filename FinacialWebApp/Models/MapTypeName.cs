@@ -14,7 +14,7 @@ namespace FinacialWebApp.Models
         public static Dictionary<int, string> ReadLabelName()
         {
             Dictionary<int, string> label = new Dictionary<int, string>();
-            string mapFile = @"C:\Users\LAPTOP\source\repos\FinacialWebApp\FinacialWebApp\Data\label_name.json";
+            string mapFile = @"D:\webprogramming\FinancialWebSite\Data\label_name.json";
             var json = File.ReadAllText(mapFile);
             JArray jArray = JArray.Parse(json);
             foreach(var item in jArray)

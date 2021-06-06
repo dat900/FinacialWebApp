@@ -1,0 +1,64 @@
+﻿
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Comparison</h2>
+<style>
+	h2 {
+		margin-top: 10px;
+		margin-bottom: 15px;
+	}
+
+	h4 {
+		margin-top: 10px;
+	}
+</style>
+
+<div class="row">
+	<canvas id="estimatechartContainer"></canvas>
+</div>
+<script type="text/javascript">	
+	//init chart
+	var chart = document.getElementById('estimatechartContainer');
+	var presentChart;
+	var chartObject;
+		$.ajax({
+		url: "@Url.Action("Calculation", "Estimation")",
+		method: 'post',
+		async: true,
+			success: function (data) {
+				var options = {
+					type: 'bar',
+					data: {
+						labels: data.labels,
+						datasets: [
+							{
+								label: "Incomes",
+								data: data.incomes_money,
+								borderWidth: 3,
+								pointRadius: 4,
+								pointBackgroundColor: 'rgb(25,12,11)',
+								backgroundColor: 'rgb(30,45,1)'
+							},
+							{
+								label: "Outcomes",
+								data: data.outcomes_money,
+								borderWidth: 3,
+								pointRadius: 4,
+								pointBackgroundColor: 'rgb(25,12,11)',
+								backgroundColor: 'rgb(78,12,11)'
+							}
+						]
+					},					
+				};
+				new Chart(chart, options);
+			presentChart = "@Url.Action("IncomeByMonth", "Incomes")";
+		}
+	});	
+	function refresh() {
+		updateChart(chartObject, presentChart);
+	}
+</script>
+

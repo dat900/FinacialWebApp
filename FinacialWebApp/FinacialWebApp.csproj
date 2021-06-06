@@ -151,6 +151,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Constants\CalculationIndex.cs" />
+    <Compile Include="Constants\ErrorMessage.cs" />
+    <Compile Include="Controllers\EditIncomesController.cs" />
+    <Compile Include="Controllers\EditOutcomesController.cs" />
+    <Compile Include="Controllers\EstimationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncomesController.cs" />
     <Compile Include="Controllers\OutcomesController.cs" />
@@ -158,6 +163,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Income.cs" />
+    <Compile Include="Models\IncomeCalculation.cs" />
+    <Compile Include="Models\IncomesViewModel.cs" />
+    <Compile Include="Models\OutcomeViewModel.cs" />
+    <Compile Include="Models\TypeModel.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\MapTypeName.cs" />
     <Compile Include="Models\Outcome.cs" />
@@ -170,6 +179,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\css\bootstrap.min.css" />
+    <Content Include="fonts\css\datepicker.css" />
+    <Content Include="fonts\css\layout.css" />
     <Content Include="fonts\css\now-ui-dashboard.css" />
     <Content Include="fonts\css\now-ui-dashboard.min.css" />
     <Content Include="fonts\demo\demo.css" />
@@ -181,15 +192,17 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Income.json" />
-    <Content Include="Data\NoteOutcomes.json" />
-    <Content Include="Data\label_name.json" />
-    <Content Include="Data\logindata.json" />
     <Content Include="fonts\css\now-ui-dashboard.css.map" />
     <Content Include="Scripts\fonts\nucleo-outline.eot" />
     <Content Include="Scripts\fonts\nucleo-outline.ttf" />
     <Content Include="Scripts\fonts\nucleo-outline.woff" />
     <Content Include="Scripts\fonts\nucleo-outline.woff2" />
+    <Content Include="fonts\nucleo-outline.eot" />
+    <Content Include="fonts\nucleo-outline.ttf" />
+    <Content Include="fonts\nucleo-outline.woff" />
+    <Content Include="fonts\nucleo-outline.woff2" />
+    <Content Include="fonts\css\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\core\bootstrap.min.js" />
@@ -207,6 +220,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\js\addNewChart.js" />
     <Content Include="Scripts\js\updateChart.js" />
+    <Content Include="Scripts\js\common.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -214,7 +228,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -223,17 +239,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Outcomes\Outcomes.cshtml" />
     <Content Include="Views\Incomes\Incomes.cshtml" />
+    <Content Include="Views\Estimation\Index.cshtml" />
+    <Content Include="Views\EditIncomes\Index.cshtml" />
+    <Content Include="Views\EditOutcomes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
